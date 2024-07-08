@@ -1,0 +1,256 @@
+[gd_scene load_steps=20 format=3 uid="uid://d3uhvwhiu3ndt"]
+
+[ext_resource type="Texture2D" uid="uid://v4y5ruubswd5" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_1po4m"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_6cnvb"]
+[ext_resource type="PackedScene" uid="uid://cmrlm2va58q6j" path="res://misc/PlayerSkull.tscn" id="2_jeywl"]
+[ext_resource type="PackedScene" uid="uid://ddt1dd4gtrq1u" path="res://misc/explosion.tscn" id="2_yvdj0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ecec"]
+radius = 106.005
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d4jr6"]
+radius = 16.0
+height = 58.0
+
+[sub_resource type="Animation" id="Animation_n1esg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o0fq3"]
+resource_name = "attack_a"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2), Vector2i(5, 2)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"dealDamageToEnemys"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1xloy"]
+resource_name = "attack_a_down"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4), Vector2i(5, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_wyjq4"]
+resource_name = "attack_a_up"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6), Vector2i(4, 6), Vector2i(5, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_37xns"]
+resource_name = "attack_b"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3), Vector2i(5, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_tcvx7"]
+resource_name = "attack_b_down"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2i(4, 5), Vector2i(5, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_o44jl"]
+resource_name = "attack_b_up"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_tdmvk"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mmhoo"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1vgcx"]
+_data = {
+"RESET": SubResource("Animation_n1esg"),
+"attack_a": SubResource("Animation_o0fq3"),
+"attack_a_down": SubResource("Animation_1xloy"),
+"attack_a_up": SubResource("Animation_wyjq4"),
+"attack_b": SubResource("Animation_37xns"),
+"attack_b_down": SubResource("Animation_tcvx7"),
+"attack_b_up": SubResource("Animation_o44jl"),
+"idle": SubResource("Animation_tdmvk"),
+"run": SubResource("Animation_mmhoo")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_id42m"]
+radius = 10.503
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1kb1"]
+bg_color = Color(0.0196078, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bsc88"]
+bg_color = Color(0.737255, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(0, 32)
+script = ExtResource("1_6cnvb")
+explosionDamage = 2
+explosionInterval = 25.0
+explosionScene = ExtResource("2_yvdj0")
+deathPrefab = ExtResource("2_jeywl")
+
+[node name="SwordArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordArea"]
+position = Vector2(0, -32)
+shape = SubResource("CircleShape2D_5ecec")
+debug_color = Color(0.894118, 0.215686, 0.6, 0)
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+position = Vector2(0, -33)
+texture = ExtResource("1_1po4m")
+hframes = 6
+vframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.19209e-07, -12)
+scale = Vector2(0.639999, 0.44)
+shape = SubResource("CapsuleShape2D_d4jr6")
+debug_color = Color(0, 0.6, 0.701961, 0.207843)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2d")
+libraries = {
+"": SubResource("AnimationLibrary_1vgcx")
+}
+autoplay = "idle"
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -33)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_id42m")
+debug_color = Color(0.991785, 0, 0.267097, 0.172549)
+
+[node name="HealthProgressBar" type="ProgressBar" parent="."]
+offset_left = -32.0
+offset_top = 1.0
+offset_right = 148.0
+offset_bottom = 24.0
+scale = Vector2(0.36, 0.36)
+theme_override_styles/background = SubResource("StyleBoxFlat_c1kb1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bsc88")
+value = 50.0
+rounded = true
+show_percentage = false

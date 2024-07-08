@@ -1,0 +1,125 @@
+[gd_scene load_steps=15 format=3 uid="uid://dmet7yb7up413"]
+
+[ext_resource type="Texture2D" uid="uid://dgp5kjwpimnx8" path="res://addons/Tiny Swords/Resources/Resources/M_Spawn.png" id="1_x35yh"]
+[ext_resource type="Script" path="res://lifeRegenerator.gd" id="2_xgmi8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odoos"]
+atlas = ExtResource("1_x35yh")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6k8p"]
+atlas = ExtResource("1_x35yh")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0o27"]
+atlas = ExtResource("1_x35yh")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p6pn"]
+atlas = ExtResource("1_x35yh")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0knjb"]
+atlas = ExtResource("1_x35yh")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yit1u"]
+atlas = ExtResource("1_x35yh")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5ph3"]
+atlas = ExtResource("1_x35yh")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u8drv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odoos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6k8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0o27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p6pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0knjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yit1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5ph3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_lj4v4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_k4ft3"]
+resource_name = "default"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vid47"]
+_data = {
+"RESET": SubResource("Animation_lj4v4"),
+"default": SubResource("Animation_k4ft3")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pgy2h"]
+radius = 24.0832
+
+[node name="Meat" type="AnimatedSprite2D"]
+position = Vector2(-1, -31)
+sprite_frames = SubResource("SpriteFrames_u8drv")
+autoplay = "default"
+script = ExtResource("2_xgmi8")
+regenerationAmount = 20
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vid47")
+}
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(1.24, 1.24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, 14)
+rotation = -1.5946
+shape = SubResource("CircleShape2D_pgy2h")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
